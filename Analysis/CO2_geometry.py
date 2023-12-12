@@ -13,7 +13,7 @@ class CO2_geometry():
     def __init__(self, dirs_path):
         self.dir_path = dirs_path+'\\'+dir
 
-    # 获取CO2以及吸附位点的坐标信息
+    # Obtain coordinates of CO2 and adsorption site information
     def data_process(self):
         with open(self.dir_path, 'r') as f:
             line = f.readlines()
@@ -23,7 +23,7 @@ class CO2_geometry():
                     fir_index = i
                 if 'O                    0' in rows:
                     las_index_list.append(i)
-                if 'O                    -模板' in rows:
+                if 'O                    -exm' in rows:
                     o_atom_of_oh_xyz = i
 
             C_atom_xyz = np.float_(re.findall(r'-?\d+\.*\d*', line[fir_index])[1:])
@@ -43,13 +43,13 @@ class CO2_geometry():
         cos = dian / (l_x * l_y)
         angle = np.arccos(cos) * 180 / np.pi
         return angle
-    # CO2的C原子与吸附位点O原子的距离
+    # Distance between the C atom of CO2 and the O atom of the adsorption site
     def CO2_OH_distance(self):
         C_atom, _, _, O_atom_of_OH = self.data_process()
         C_O_distance = O_atom_of_OH-C_atom
         CO2_OH_distance = np.sqrt(sum(i**2 for i in C_O_distance))
         return CO2_OH_distance
-    # CO2中C-O平均键长
+    # C-O bond average distance of CO2
     def CO_distance_of_CO2(self):
         C_atom, O_atom1, O_atom2, _ = self.data_process()
         C_O_distance1 = O_atom1-C_atom
@@ -62,7 +62,7 @@ class CO2_geometry():
 
 
 if __name__ == '__main__':
-    dirs_path = "C:\\Users\Wangy\Desktop\新建文件夹"
+    dirs_path = "newfolder"
     dirs = os.listdir(dirs_path)
     for dir in dirs:
         res = CO2_geometry(dirs_path)
