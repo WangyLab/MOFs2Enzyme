@@ -48,8 +48,8 @@ def get_HCO3_charge(charge_path, H, C, O1, O2, O3):
     return total_charge
 
 if __name__ == '__main__':
-    cif_path = "C:\\Users\Wangy\Desktop\新建文件夹\cif"
-    charge_path = "C:\\Users\Wangy\Desktop\新建文件夹\charge"
+    cif_path = "newfolder\cif"
+    charge_path = "newfolder\charge"
     dirs = os.listdir(cif_path)
     dirs.remove('desktop.ini')
     for dir in dirs:
